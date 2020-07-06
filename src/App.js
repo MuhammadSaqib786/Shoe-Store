@@ -1,23 +1,36 @@
-import React from 'react';
-import './App.css';
-import Hello from './hello';
-import './index.css'
+import React from "react";
+import "./App.css";
+import "./index.css";
+import { BrowserRouter, Route, Router, Routes } from "react-router-dom";
+import { Header } from "./Components/Header";
+import { Home } from "./Components/Home";
+import { Products } from "./Components/Products";
+import { ProductDetails } from "./Components/ProductDetails";
+import { ProductIndex } from "./Components/ProductIndex";
 
-function App({name,age}) {
-const [isLit, setLit] = React.useState(true);
-return <div className={`room ${isLit ? "lit" : "dark"}`}> Hello  <strong>{name} </strong> 
-<br/>
-<ul>
-<li>Your Name is : {name}</li>
-<li>Your age is : {age}</li>
-<li>You are computer scientist</li>
-</ul>
- <Hello firstName={name}/>
- <button onClick={() => setLit(!isLit)}>
-    flip
-  </button> <br/>
- 
- </div>
+function NotFound() {
+  return (
+    <div>
+      <span style={{ color: "red" }}>Page Not Found</span>
+    </div>
+  );
+}
+function App() {
+  return (
+    <div>
+      <BrowserRouter>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home />}></Route>
+          <Route path="products" element={<Products />}>
+          <Route path="/" element={<ProductIndex/>}></Route>
+            <Route path=":productId" element={<ProductDetails />}></Route>
+          </Route>
+          <Route path="*" element={<NotFound />}></Route>
+        </Routes>
+      </BrowserRouter>
+    </div>
+  );
 }
 
 export default App;
