@@ -13,6 +13,9 @@ export const ProductDetails = () => {
           img:
             "http://www.servis.com/wp-content/uploads/2019/11/ND-WF-0002-Espresso-01-510x340.jpg",
         },
+        "ND-ST-0108":
+          {  name: "sasty shoes" ,
+            img : "http://www.servis.com/wp-content/uploads/2019/11/ND-ST-0108-Blue-01.jpg"},
     };
     const {productId}= useParams();
     const product= shoes[productId];
@@ -23,7 +26,7 @@ export const ProductDetails = () => {
       <h3>Product Details</h3>
       <div>
           Name : {name} <br/>
-          <img src={img} alt={name}/>
+          <img src={img} alt={name} style={{width:"40%"}}/>
       </div>
     </div>
   );
