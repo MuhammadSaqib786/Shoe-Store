@@ -1,38 +1,30 @@
 import React from "react";
-import "./App.css";
-import "./index.css";
-import { BrowserRouter, Route, Router, Routes } from "react-router-dom";
-import { Header } from "./Components/Header";
-import { Home } from "./Components/Home";
-import { Products } from "./Components/Products";
-import { ProductDetails } from "./Components/ProductDetails";
-import { ProductIndex } from "./Components/ProductIndex";
-import { ProductMen } from "./Components/ProductMen";
-import { ProductWomen } from "./Components/ProductWomen";
-function NotFound() {
-  return (
-    <div>
-      <span style={{ color: "red" }}>Page Not Found</span>
-    </div>
-  );
-}
+import "./assets/output.css";
+import Navbar from "./layouts/navbar";
+import Footer from "./layouts/footer";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Index from "./pages/index";
+import Shop from "./pages/shop";
+import Product from "./pages/product";
+import Contact from "./pages/contact";
+import NotFound from "./pages/notfound";
+import { GlobalContextProvider } from "./context/globalContext";
+
 function App() {
   return (
-    <div>
-      <BrowserRouter>
-        <Header />
+    <Router>
+      <GlobalContextProvider>
+        <Navbar />
         <Routes>
-          <Route path="/" element={<Home />}></Route>
-          <Route path="men" element={<ProductMen />}></Route>
-          <Route path="women" element={<ProductWomen />}></Route>
-          <Route path="products" element={<Products />}>
-            <Route path="/" element={<ProductIndex />}></Route>
-            <Route path=":productId" element={<ProductDetails />}></Route>
-          </Route>
-          <Route path="*" element={<NotFound />}></Route>
+          <Route path="/" exact element={<Index />} />
+          <Route path="/shop" element={<Shop />} />
+          <Route path="/shop/:slug" element={<Product />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/*" element={<NotFound />} />
         </Routes>
-      </BrowserRouter>
-    </div>
+        <Footer />
+      </GlobalContextProvider>
+    </Router>
   );
 }
 
